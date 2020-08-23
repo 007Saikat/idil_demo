@@ -1,0 +1,113 @@
+{%extends "user_admin/admin_base.html" %}
+{% load static %}
+{% block body_block %}
+<header class="header">
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+
+            <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                    class="navbar-toggler navbar-toggler-right">Menu<i class="fa fa-bars"></i>
+            </button>
+            <div id="navbarSupportedContent" class="collapse navbar-collapse">
+
+            <a href="/user_admin/{{usr.username}}" class="navbar-brand">
+                <img src="/static/img/logo.svg" alt="logo" class="d-none d-lg-block">
+                <span class="sr-only">Home</span>
+            </a>
+
+                
+                <ul class="navbar-nav ml-auto">
+                    <li id="navHone" class="nav-item ">
+                        <a href="/user_admin/{{usr.username}}" class="nav-link">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li id="navChallenge" class="nav-item">
+                        <a href="/user_admin/add/{{usr.username}}" class="nav-link">Add New Challenges</a>
+                    </li>
+                    <li id="navBoard" class="nav-item">
+                        <a href="/user_admin/acc/{{usr.username}}" class="nav-link">My Account</a>
+                    </li>
+
+                    {% if user.is_authenticated %}
+                        <li id="navuser2" class="nav-item " style="color: #fff">
+                            <a href="{% url 'basic_app:user_logout' %}"class="btn navbar-btn btn-outline-light mb-5 mb-lg-0">
+                                <i class="fa fa-sign-in"></i>Logout
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>         
+            </div>
+        </div>
+    </nav>
+</header>
+<br>
+<div class="card text-center" style="width:80%; margin-left : 10%">
+  <div class="card-header" style="color:red">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Add New Challenges</b>
+  </div>
+  <div class="card-body" >
+    <form method="POST" action="/user_admin/save_challenge/{{usr.username}}">
+        {% csrf_token %}
+        <div class="form-group row">
+            <label for="inputPassword" class="col-sm-2 col-form-label" >Challenge Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputPassword" name="cn" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPassword" class="col-sm-2 col-form-label" >Technology</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="inputPassword" name="tech" required>
+            </div>
+            <label for="inputPassword" class="col-sm-2 col-form-label" >Account</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="inputPassword" name="acc" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPassword" class="col-sm-2 col-form-label" >Capability</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="inputPassword" name="cap" required>
+            </div>
+            <label for="inputPassword" class="col-sm-2 col-form-label" >Digital Points</label>
+            <div class="col-sm-4">
+                <input type="number" class="form-control" id="inputPassword" name="points" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPassword" class="col-sm-2 col-form-label" >Expiry Date</label>
+            <div class="col-sm-4">
+                <input type="date" class="form-control" id="inputPassword" name="edate" required>
+            </div>
+            <label for="inputPassword" class="col-sm-2 col-form-label" >Challenge Category</label>
+                <div class="col-sm-4">
+                    <select class="form-control" id="inlineFormCustomSelectPref" name="cat">
+                        <option value="WORKING" selected>WORKING</option>
+                        <option value="LEARNING">LEARNING</option>
+                    </select>
+                </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPassword" class="col-sm-2 col-form-label" >Manager</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="inputPassword" name="manager" required>
+            </div>
+            <label for="inputPassword" class="col-sm-2 col-form-label" >Product Owner</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="inputPassword" name="powner" required>
+            </div>
+        </div>
+        <div class="form-group row">
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputPassword" class="col-sm-2 col-form-label" >Project Description</label>
+            <textarea class="form-control"  style="width:81%" id="exampleFormControlTextarea1" rows="3" name="desc" placeholder="Challenge Description" required></textarea>
+        </div>
+        
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" class="btn btn-outline-primary" value="ADD">
+        
+    </form>
+  </div>
+</div>
+<br>
+{% endblock %}
+

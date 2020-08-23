@@ -1,0 +1,148 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}" />
+		<script type="text/javascript" src="{% static 'js/modernizr.custom.86080.js' %}"></script>
+    </head>
+    <body>
+    
+        <ul class="cb-slideshow">
+            <li><span>Image 01</span><div></div></li>
+            <li><span>Image 02</span><div></div></li>
+            <li><span>Image 03</span><div></div></li>
+            <li><span>Image 04</span><div></div></li>
+            <li><span>Image 05</span><div></div></li>
+            <li><span>Image 06</span><div></div></li>
+        </ul>
+
+       {% if show_div %}
+       
+        <br>
+        <br>
+        <br>
+        <div class="container register">
+                <div class="row">
+                    <div class="col-md-3 register-left">
+                        <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+                        <h3>Welcome</h3>
+                        <form action="{% url 'basic_app:login_register'%}" method="get">
+                            <input type="submit" id="login" name="login" value="Login"/><br/>
+                        </form>
+                    </div>
+                    <div class="col-md-9 register-right">
+                        
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <h1 class="register-heading"><b>Fill the Details Below</b></h1>
+                                <form method="POST" enctype="multipart/form-data">
+                                   {% csrf_token %}
+                                 <div class="row register-form">
+                                    <div class="col-md-6">
+                                        <div class="form-group"> 
+                                            {{ user_form.first_name }}
+                                           
+                                        </div>
+                                        <div class="form-group">
+                                            
+                                        </div>
+                                        <div class="form-group">
+                                            {{ user_form.username }}
+                                        </div>
+                                        <div class="form-group">
+                                           {{ user_form.password}}
+                                        </div>
+                                        <div class="form-group">
+                                           
+                                        </div>
+                                        
+                                           
+                                    </div>
+                                     
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            {{ user_form.last_name }}
+                                        </div>
+                                        <div class="form-group">
+                                           {{ user_form.email }}
+                                        </div>
+                                    </div>
+                                     &nbsp;&nbsp;&nbsp;&nbsp;<p> Upload Profile Photo{{ user_detail_form.profile_pic }}
+                                     {% if not warning %}
+                                        <span style='color:red; font-size:11px'>supported files *jpg,*jpeg,*png</span>
+                                    
+                                     {% else %}
+                                        <span style='color:red; font-size:11px'>Unsupported file uploaded</span>
+                                     {%endif%}
+                                     </p>
+                                    <div class="col-md-8"> 
+                                        <input type="submit" class="btnRegister"  value="Register"/>
+                                    </div>
+                                 </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+           
+
+            {% else %}
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="container register">
+                <div class="row">
+                    <div class="col-md-3 register-left">
+                        <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+                        <h3>Welcome</h3>
+                        <form action="{% url 'basic_app:login_register'%}" method="get">
+                        <input type="submit" name="reg" value="Register"/><br/>
+                        </form>
+                    </div>
+                    <div class="col-md-9 register-right">
+                        
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <h3 class="register-heading"><b>Enter Your Credentials</b></h3>
+                                <form method="POST" action="{% url 'basic_app:login_register'%}">
+                                    {% csrf_token %}
+                                    <div class="row register-form">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input type="text" name="username" class="form-control" required placeholder="Enter your username">
+                                                
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" name="password" class="form-control" required  placeholder="Enter your password">
+                                            </div>
+                                            {% if error %}
+                                                <span style='color:red'>  Username or Password Invalid</span>
+                                            {% endif %}
+                                        </div>
+                                        
+                                        <div class="col-md-8"> 
+                                            <input type="submit" class="btnRegister"  value="Login"/>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+             {% endif %} 
+
+
+    </body>
+
+</html>

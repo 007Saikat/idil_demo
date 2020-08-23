@@ -1,0 +1,148 @@
+{%extends "user_admin/admin_base.html" %}
+{% load static %}
+{% block body_block %}
+<header class="header">
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+
+            <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                    class="navbar-toggler navbar-toggler-right">Menu<i class="fa fa-bars"></i>
+            </button>
+            <div id="navbarSupportedContent" class="collapse navbar-collapse">
+
+            <a href="/user_admin/{{usr.username}}" class="navbar-brand">
+                <img src="/static/img/logo.svg" alt="logo" class="d-none d-lg-block">
+                <span class="sr-only">Home</span>
+            </a>
+
+                
+                <ul class="navbar-nav ml-auto">
+                    <li id="navHone" class="nav-item ">
+                        <a href="/user_admin/{{usr.username}}" class="nav-link">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li id="navChallenge" class="nav-item">
+                        <a href="/user_admin/add/{{usr.username}}" class="nav-link">Add New Challenges</a>
+                    </li>
+                    <li id="navBoard" class="nav-item">
+                        <a href="/user_admin/acc/{{usr.username}}" class="nav-link">My Account</a>
+                    </li>
+
+                    {% if user.is_authenticated %}
+                        <li id="navuser2" class="nav-item " style="color: #fff">
+                            <a href="{% url 'basic_app:user_logout' %}"class="btn navbar-btn btn-outline-light mb-5 mb-lg-0">
+                                <i class="fa fa-sign-in"></i>Logout
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>         
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="vd_content-section clearfix">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="panel widget light-widget">
+                  <div class="panel-heading no-title"> </div>
+                    <div  class="panel-body">
+                      <h2 class="mgbt-xs-20"> Profile: <span class="font-semibold">{{usr.first_name}} {{usr.last_name}}</span> </h2>
+                      <br/>
+                      <div class="row">
+                        <div class="col-sm-3 mgbt-xs-20">
+                          <div class="form-group">
+                            <div class="col-xs-12">
+                              <div class="form-img text-center mgbt-xs-15"> <img alt="example image" src="/media/{{uad.profile_pic}}" style="width:75%; height:50%"> </div>
+                              <hr>
+                                <form action="/user_admin/upload/{{usr.username}}" method="POST" enctype="multipart/form-data">
+                                   {% csrf_token %}
+                                    <div class="form-img-action text-center mgbt-xs-20"> 
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="upload" name="pic" type="file"/><hr>
+                                        <input type="submit" class="btn vd_btn  vd_bg-blue" id="upload_link" value="upload"><i class="fa fa-cloud-upload append-icon"></i>
+                                    </div>
+                                </form>
+                              <br/>
+                             
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-9">
+                          <h3 class="mgbt-xs-15">Account Setting</h3>
+                          <form action="/user_admin/save/{{usr.username}}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group row">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Username</label>
+                                <div class="col-sm-8">
+                                <input type="text" readonly class="form-control" name="uname" value={{usr.username}}>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-8">
+                                <input type="text" class="form-control" name="email" value={{usr.email}} >
+                                </div>
+                            </div>
+                         
+                            <input type="submit" class="btn btn-success" value="Save">
+                         </form>
+                            <hr>
+                             <h3 class="mgbt-xs-15">Change Password</h3>
+                            <form action="/user_admin/change/{{usr.username}}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">Old Password</label>
+                                <div class="col-sm-8">
+                                <input type="password" class="form-control"  id="pass_input"  name="op" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">New Password</label>
+                                <div class="col-sm-8">
+                                <input type="password" class="form-control" id="pass_input1" name="np" required>
+                                </div>
+                            </div>
+                            <input type="submit" class="btn btn-success" id="register" value="Change Password" >
+                                    {% if  er%}
+                                        <span style="color:red">Old Password is not correct</span>
+                                    {% endif %}
+                                    {% if  dm%}
+                                        <span style="color:red">Both Password are equal</span>
+                                    {% endif %}
+                            </form>
+                            <br>
+                            <p style="color:red">N.B:- After Succesful Password Change You have to Re Login</p>
+                          <hr>
+                          <h3 class="mgbt-xs-15">Profile Setting</h3>
+                          <form action="/user_admin/update/{{usr.username}}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">First Name</label>
+                                <div class="col-sm-8">
+                                <input type="text" class="form-control" id="inputPassword" name="fn" value="{{usr.first_name}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">Last Name</label>
+                                <div class="col-sm-8">
+                                <input type="text" class="form-control" id="inputPassword" name="ln" value="{{usr.last_name}}" >
+                                </div>
+                            </div>
+                            <input type="submit" class="btn btn-success" value="Update">
+                        </form>
+                        </div>
+                      
+                    </div>
+                    <!-- panel-body -->
+                    </div>
+                </div>
+                <!-- Panel Widget --> 
+              </div>
+              <!-- col-sm-12--> 
+            </div>
+            <!-- row --> 
+            
+</div>
+          <!-- .vd_content-section --> 
+<hr>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>iDIL</title>
+    <meta name="description" content="">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/static/img/faviocon.png"  type="image/x-icon">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet"
+          href="/static/vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet"
+          href="/static/vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Google fonts - Roboto for copy, Montserrat for headings-->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,700">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Montserrat:400,700">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+    <!-- owl carousel-->
+    <link rel="stylesheet"
+          href="/static/vendor/owl.carousel/assets/owl.carousel.css">
+    <link rel="stylesheet"
+          href="/static/vendor/owl.carousel/assets/owl.theme.default.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/static/css/style.default.css"
+          id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/static/css/custom.css">
+    <link rel="stylesheet" href="/static/css/add.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/static/vendor/bootstrap-select/css/bootstrap-select.min.css">
+    <script src="https://code.jquery.com/jquery-migrate-3.3.1.js" integrity="sha256-lGuUqJUPXJEMgQX/RRaM6mZkK6ono5i5bHuBME4qOCo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js" integrity="sha512-wxLJoyhMdb3r9t00CpwvDsbgnHongW0fzpEKS2Y0X2H+ThyUd0AhHVD1/SH37RGSE2/krrzpU+71E37X7UV+4w==" crossorigin="anonymous"></script>
+    
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"></style>
+<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+
+</head>
+<body>
+    {%  block body_block %}
+    {% endblock %}
+    <footer class="footer">
+    <div class="footer__block">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-12 mb-5">
+                    <h4 class="h5">About iDIL</h4>
+                    <p> Challenges that make a difference </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer__copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 text-md-left text-center">
+                    <p>&copy;2020  iDil - Digital Innovation & Consulting (IBS Software) &emsp;&emsp;&emsp;&emsp; v: 2.0</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script type='text/javascript'>
+$(document).ready(function() {
+    var table = $('#example').DataTable( {
+        lengthChange: false,
+        buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
+    } );
+ 
+    table.buttons().container()
+        .appendTo( '#example_wrapper .col-md-6:eq(0)' );
+} );
+</script>
+<script src="/static/vendor/popper.js/umd/popper.min.js"></script>
+<script src="/static/vendor/jquery.cookie/jquery.cookie.js"></script>
+<script src="{% static 'vendor/owl.carousel/owl.carousel.js' %}"></script>
+<script src="/static/js/front.js"></script>
+<script src="/static/js/custom.js"></script>
+</body>
